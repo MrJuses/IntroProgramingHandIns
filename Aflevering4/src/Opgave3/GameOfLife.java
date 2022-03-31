@@ -24,6 +24,7 @@ public class GameOfLife {
             }
             System.out.println("");
         }
+        System.out.println(" ");
     }
 
     public void init(int xlim, int ylim) {
@@ -31,7 +32,7 @@ public class GameOfLife {
         for (int x = 0; x < xlim; x++) {
             for (int y = 0; y < ylim; y++) {
                 if (grid[y][x] == 1) {
-                    StdDraw.point(x, y);
+                    StdDraw.point(y, x);
                 }
             }
         }
@@ -70,8 +71,11 @@ public class GameOfLife {
                 else {
                     pass(neighborcheck(x - 1, x + 1, y - 1, y + 1), x, y);
                 }
+                System.out.print(futuregrid[y][x] + " ");
             }
+            System.out.println(" ");
         }
+        System.out.println("");
         grid = futuregrid;
     }
 
@@ -80,8 +84,8 @@ public class GameOfLife {
         for (int x = xs; x <= xe; x++) {
             for (int y = ys; y <= ye; y++) {
                 this.alive += grid[y][x];
-                System.out.println(this.alive);
-                System.out.println(" ");
+                //System.out.println(this.alive);
+                //System.out.println(" ");
             }
         }
         return this.alive;
