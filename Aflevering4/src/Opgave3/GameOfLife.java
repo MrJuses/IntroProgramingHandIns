@@ -34,7 +34,7 @@ public class GameOfLife {
                 }
             }
         }
-        StdDraw.show(200);
+        StdDraw.show(5000);
     }
 
     public void state(int xlim, int ylim) {
@@ -43,31 +43,31 @@ public class GameOfLife {
             for (int y = 0; y < ylim; y++) {
                 //Corners:
                 if (x == 0 && y == 0) {
-                    update(pass(neighborcheck(x, 1, y, 1), x, y), x, y);
+                    pass(neighborcheck(x, 1, y, 1), x, y);
 
                 } else if (x == 0 && y == ylim - 1) {
-                    update(pass(neighborcheck(x, 1, ylim - 2, ylim - 1), x, y), x, y);
+                    pass(neighborcheck(x, 1, ylim - 2, ylim - 1), x, y);
 
                 } else if (x == xlim - 1 && y == 0) {
-                    update(pass(neighborcheck(xlim - 2, xlim - 1, y, 1), x, y), x, y);
+                    pass(neighborcheck(xlim - 2, xlim - 1, y, 1), x, y);
 
                 } else if (x == xlim - 1 && y == ylim - 1) {
-                    update(pass(neighborcheck(xlim - 2, xlim - 1, ylim - 2, ylim - 1), x, y), x, y);
+                    pass(neighborcheck(xlim - 2, xlim - 1, ylim - 2, ylim - 1), x, y);
 
                 }
                 //Edges
                 else if (x == 0) {
-                    update(pass(neighborcheck(x, 1, y - 1, y + 1), x, y), x, y);
+                    pass(neighborcheck(x, 1, y - 1, y + 1), x, y);
                 } else if (y == 0) {
-                    update(pass(neighborcheck(x - 1, x + 1, 0, 1), x, y), x, y);
+                    pass(neighborcheck(x - 1, x + 1, y, 1), x, y);
                 } else if (x == xlim - 1) {
-                    update(pass(neighborcheck(xlim - 2, xlim - 1, y - 1, y + 1), x, y), x, y);
+                    pass(neighborcheck(xlim - 2, xlim-1, y - 1, y + 1), x, y);
                 } else if (y == ylim - 1) {
-                    update(pass(neighborcheck(x - 1, x + 1, ylim - 2, ylim - 1), x, y), x, y);
+                    pass(neighborcheck(x - 1, x + 1, ylim - 2, ylim - 1), x, y);
                 }
                 //Middle
                 else {
-                    update(pass(neighborcheck(x - 1, x + 1, y - 1, y + 1), x, y), x, y);
+                    pass(neighborcheck(x - 1, x + 1, y - 1, y + 1), x, y);
                 }
             }
         }
@@ -75,47 +75,50 @@ public class GameOfLife {
     }
 
     public int neighborcheck(int xs, int xe, int ys, int ye) {
-        for (int x = xs; x < xe; x++) {
-            for (int y = ys; y < ye; y++) {
+        for (int x = xs; x <= xe; x++) {
+            for (int y = ys; y <= ye; y++) {
                 this.alive += grid[y][x];
             }
         }
         return this.alive;
     }
 
-    public Boolean pass(int neighborcheck, int x, int y) {
+    public void pass(int neighborcheck, int x, int y) {
         int neighbors = neighborcheck - grid[y][x];
-        if (grid[y][x] == 1 && neighbors < 2) {
+        if(grid[x][y] == 1){
+            if(neighbors < 2){
+                futuregrid[y][x] = 0;
+            } else if(neighbors > 3){
+                futuregrid[y][x] = 0;
+            } else {
+                futuregrid[y][x] = 1;
+            }
+        } else{
+            if(neighbors == 3){
+                futuregrid[y][x] = 1;
+            } else {
+                futuregrid[y][x] = 0;
+            }
+        }
+        /*if (grid[y][x] == 1 && neighbors < 2) {
             return false;
         } else if (grid[y][x] == 1 && neighbors > 3) {
             return false;
-        } else if (grid[y][x] == 1 && neighbors == 2 || neighbors == 3) {
+        } else if (grid[y][x] == 1 && (neighbors == 2 || neighbors == 3)) {
             return true;
         } else if (grid[y][x] == 0 && neighbors == 3) {
             return true;
         } else {
-            return false;
-        }
+            return true;
+        }*/
     }
 
-    public void update(boolean status, int x, int y) {
+    /*public void update(boolean status, int x, int y) {
+        System.out.println(status);
         if (status) {
             futuregrid[y][x] = 1;
         } else {
             futuregrid[y][x] = 0;
         }
-    }
-
-    public int isGameRunning(int xlim, int ylim) {
-        this.game = 0;
-        for (int x = 0; x < xlim; x++) {
-            for (int y = 0; y < ylim; y++) {
-                if(grid[x][y] == 1) {
-                    this.game++;
-                    System.out.println(this.game);
-                }
-            }
-        }
-        return this.game;
-    }
+    }*/
 }
