@@ -19,9 +19,10 @@ public class GameOfLife {
         futuregrid = new int[xlim][ylim];
         for (int x = 0; x < xlim; x++) {
             for (int y = 0; y < ylim; y++) {
-                grid[y][x] = rand.nextInt(0, 2);
-                System.out.println(grid[y][x]);
+                grid[y][x] = rand.nextInt(2);
+                System.out.print(grid[y][x] + " ");
             }
+            System.out.println("");
         }
     }
 
@@ -34,7 +35,7 @@ public class GameOfLife {
                 }
             }
         }
-        StdDraw.show(5000);
+        StdDraw.show(10000);
     }
 
     public void state(int xlim, int ylim) {
@@ -75,9 +76,12 @@ public class GameOfLife {
     }
 
     public int neighborcheck(int xs, int xe, int ys, int ye) {
+        this.alive = 0;
         for (int x = xs; x <= xe; x++) {
             for (int y = ys; y <= ye; y++) {
                 this.alive += grid[y][x];
+                System.out.println(this.alive);
+                System.out.println(" ");
             }
         }
         return this.alive;
@@ -85,7 +89,7 @@ public class GameOfLife {
 
     public void pass(int neighborcheck, int x, int y) {
         int neighbors = neighborcheck - grid[y][x];
-        if(grid[x][y] == 1){
+        if(grid[y][x] == 1){
             if(neighbors < 2){
                 futuregrid[y][x] = 0;
             } else if(neighbors > 3){
@@ -96,8 +100,6 @@ public class GameOfLife {
         } else{
             if(neighbors == 3){
                 futuregrid[y][x] = 1;
-            } else {
-                futuregrid[y][x] = 0;
             }
         }
         /*if (grid[y][x] == 1 && neighbors < 2) {
