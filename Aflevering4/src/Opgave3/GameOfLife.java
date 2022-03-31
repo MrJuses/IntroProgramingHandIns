@@ -13,7 +13,7 @@ public class GameOfLife {
         StdDraw.setXscale(-1,xlim);
         StdDraw.setYscale(-1,ylim);
         StdDraw.setPenColor(StdDraw.BLACK);
-        StdDraw.setPenRadius(0.2);
+        StdDraw.setPenRadius(1.1/(double)(xlim+ylim));
         grid =  new int [xlim][ylim];
         futuregrid =  new int [xlim][ylim];
         for(int x = 0 ; x < xlim ; x++){
@@ -29,10 +29,10 @@ public class GameOfLife {
             for(int y = 0 ; y < ylim ; y++){
                 if(grid[y][x] == 1){
                     StdDraw.point(x,y);
-                    StdDraw.show(200);
                 }
             }
         }
+        StdDraw.show(200);
     }
     public void state(int xlim, int ylim){
         //lonely
@@ -68,9 +68,7 @@ public class GameOfLife {
                 }
             }
         }
-
         grid = futuregrid;
-
     }
     public int neighborcheck(int xs, int xe, int ys, int ye){
         for(int x = xs ; x < xe ; x++){
