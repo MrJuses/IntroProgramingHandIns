@@ -10,11 +10,10 @@ public class GameOfLife {
     Random rand = new Random();
 
     public static void main(String[] args){
+        GameOfLife gameOfLife = new GameOfLife();
+        gameOfLife.gameoflife(3);
         while(true){
-            GameOfLife gameOfLife = new GameOfLife();
-            gameOfLife.gameoflife(3);
-            StdDraw.point(1,1);
-            StdDraw.show();
+            gameOfLife.init(3);
             gameOfLife.state(3);
         }
 
@@ -57,10 +56,10 @@ public class GameOfLife {
                     update(pass(neighborcheck(x,1,n-2,n-1),x,y),x,y);
 
                 } else if(x == n-1 && y == 0){
-                    update(pass(neighborcheck(0,1,n-2,n-1),x,y),x,y);
+                    update(pass(neighborcheck(n-2,n-1,y,1),x,y),x,y);
 
                 } else if(x == n-1 && y == n-1){
-                    update(pass(neighborcheck(0,1,n-2,n-1),x,y),x,y);
+                    update(pass(neighborcheck(n-2,n-1,n-2,n-1),x,y),x,y);
 
                 }
                 //Edges
