@@ -7,16 +7,14 @@ public class GameOfLife {
     public int[][] grid;
     public int[][] futuregrid;
     int alive = 0;
-    int game;
     Random rand = new Random();
 
     GameOfLife(int xlim, int ylim) {
-        StdDraw.setXscale(-1, xlim);
-        StdDraw.setYscale(-1, ylim);
+        StdDraw.setXscale(-1, xlim-(1/2.0));
+        StdDraw.setYscale(-1, ylim-(1/2.0));
         StdDraw.setPenColor(StdDraw.BLACK);
-        StdDraw.setPenRadius(1.1 / (double) (xlim + ylim));
-        grid = new int[xlim][ylim];
-        futuregrid = new int[xlim][ylim];
+        grid = new int[ylim][xlim];
+        futuregrid = new int[ylim][xlim];
         for (int x = 0; x < xlim; x++) {
             for (int y = 0; y < ylim; y++) {
                 grid[y][x] = rand.nextInt(2);
@@ -28,14 +26,32 @@ public class GameOfLife {
     }
 
     public void init(int xlim, int ylim) {
+        double angle = (Math.PI/4);
         StdDraw.clear();
         for (int x = 0; x < xlim; x++) {
             for (int y = 0; y < ylim; y++) {
                 if (grid[y][x] == 1) {
-                    StdDraw.point(y, x);
+                    StdDraw.filledSquare(x+1-(xlim/(xlim*(4/5.0))),y+1-(ylim/(ylim*(4/5.0))),1/2.0);
+                } else{
+                    StdDraw.square(x+1-(xlim/(xlim*(4/5.0))),y+1-(ylim/(ylim*(4/5.0))),1/2.0);
                 }
+//                double centerx = (x+1-(xlim/(xlim*(4/5.0))));
+//                double centery = (y+1-(ylim/(ylim*(4/5.0))));
+//                double newpx = (centerx-((xlim-1.5)/2.0));
+//                double newpy = (centery-((ylim-1.5)/2.0));
+//                double rotpx = ((newpx*Math.cos(angle))-(newpy*Math.sin(angle)));
+//                double rotpy = (newpx*Math.sin(angle))+(newpy*Math.cos(angle));
+//                double finpx = (rotpx+((xlim-1.5)/2.0));
+//                double finpy = (rotpy-((ylim-1.5)/2.0));
+//                if (grid[y][x] == 1) {
+//                    StdDraw.filledSquare(finpx,finpy,1/2.0);
+//                } else{
+//                    StdDraw.square(finpx,finpy,1/2.0);
+//                }
             }
         }
+        //StdDraw.square(((xlim-(1/2.0))/(2.0)),((ylim-(1/2.0))/(2.0)),1/2.0);
+        //StdDraw.square(((double)(xlim)-1.5)/2.0,(double)(ylim),1/2.0);
         StdDraw.show(10000);
     }
 
