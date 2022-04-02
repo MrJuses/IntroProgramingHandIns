@@ -15,8 +15,8 @@ public class GameOfLife {
         StdDraw.setPenColor(StdDraw.BLACK);
         grid = new int[ylim][xlim];
         futuregrid = new int[ylim][xlim];
-        for (int x = 0; x < xlim; x++) {
-            for (int y = 0; y < ylim; y++) {
+        for (int y = 0; y < ylim; y++) {
+            for (int x = 0; x < xlim; x++) {
                 grid[y][x] = rand.nextInt(2);
                 System.out.print(grid[y][x] + " ");
             }
@@ -27,8 +27,8 @@ public class GameOfLife {
 
     public void init(int xlim, int ylim) {
         StdDraw.clear();
-        for (int x = 0; x < xlim; x++) {
-            for (int y = 0; y < ylim; y++) {
+        for (int y = 0; y < ylim; y++) {
+            for (int x = 0; x < xlim; x++) {
 //                if (grid[y][x] == 1) {
 //                    StdDraw.filledSquare((x+1-(xlim/(xlim*(4/5.0)))),-(y+1-(ylim/(ylim*(4/5.0)))),1/2.0);
 //                } else{
@@ -46,8 +46,8 @@ public class GameOfLife {
 
     public void state(int xlim, int ylim) {
         //lonely
-        for (int x = 0; x < xlim; x++) {
-            for (int y = 0; y < ylim; y++) {
+        for (int y = 0; y < ylim; y++) {
+            for (int x = 0; x < xlim; x++) {
                 //Corners:
                 if (x == 0 && y == 0) {
                     pass(neighborcheck(x, 1, y, 1), x, y);
@@ -86,8 +86,8 @@ public class GameOfLife {
 
     public int neighborcheck(int xs, int xe, int ys, int ye) {
         this.alive = 0;
-        for (int x = xs; x <= xe; x++) {
-            for (int y = ys; y <= ye; y++) {
+        for (int y = ys; y <= ye; y++) {
+            for (int x = xs; x <= xe; x++) {
                 this.alive += grid[y][x];
                 //System.out.println(this.alive);
                 //System.out.println(" ");
