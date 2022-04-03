@@ -1,6 +1,10 @@
 package Opgave3;
 
 import lib.StdDraw;
+
+import java.awt.*;
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.*;
 
 public class GameOfLife {
@@ -9,21 +13,56 @@ public class GameOfLife {
     int alive = 0;
     Random rand = new Random();
 
-    GameOfLife(int xlim, int ylim) {
-        StdDraw.setXscale(-1, xlim-(1/2.0));
-        StdDraw.setYscale(-ylim+(1/2.0), 1);
+    GameOfLife(int xlim, int ylim) throws FileNotFoundException {
+        Scanner console = new Scanner(System.in);
+        int cont = 0;
+        while (cont == 0) {
+            System.out.println("1 for random grid, 2 for specific start from file:");
+            if (console.nextInt() == 1) {
+                cont = 1;
+                break;
+            } else if (console.nextInt() == 2) {
+                cont = 2;
+                break;
+            } else {
+                System.out.println("You did not type in 1 or 2");
+            }
+        }
+        StdDraw.setXscale(-1, xlim);
+        StdDraw.setYscale(-ylim, 1);
         StdDraw.setPenColor(StdDraw.BLACK);
         grid = new int[ylim][xlim];
         futuregrid = new int[ylim][xlim];
-        for (int y = 0; y < ylim; y++) {
-            for (int x = 0; x < xlim; x++) {
-                grid[y][x] = rand.nextInt(2);
-                System.out.print(grid[y][x] + " ");
+
+        if (cont == 1) {
+            for (int y = 0; y < ylim; y++) {
+                for (int x = 0; x < xlim; x++) {
+                    grid[y][x] = rand.nextInt(2);
+                    System.out.print(grid[y][x] + " ");
+                }
+                System.out.println("");
             }
-            System.out.println("");
+            System.out.println(" ");
+        } else {
+            Scanner file = new Scanner(System.in);
+            System.out.println("Hvilken startprofil ønsker du?");
+            Scanner input = new Scanner(new File("Aflevering4/src/lib/" + file.nextLine()));
+            int rows = -1;
+            boolean line = true;
+            while ((line = input.hasNextLine()) == true) {
+                rows++;
+            }
+            for (int y = 0; y < rows; y++) {
+                for (int x = 0; x < rows; x++) {
+                    grid[y][x] = input.nextInt();
+                    System.out.print(grid[y][x] + " ");
+                }
+                System.out.println("");
+            }
+            System.out.println(" ");
         }
-        System.out.println(" ");
     }
+
 
     public void init(int xlim, int ylim) {
         StdDraw.clear();
@@ -89,8 +128,6 @@ public class GameOfLife {
         for (int y = ys; y <= ye; y++) {
             for (int x = xs; x <= xe; x++) {
                 this.alive += grid[y][x];
-                //System.out.println(this.alive);
-                //System.out.println(" ");
             }
         }
         return this.alive;
@@ -111,25 +148,5 @@ public class GameOfLife {
                 futuregrid[y][x] = 1;
             }
         }
-        /*if (grid[y][x] == 1 && neighbors < 2) {
-            return false;
-        } else if (grid[y][x] == 1 && neighbors > 3) {
-            return false;
-        } else if (grid[y][x] == 1 && (neighbors == 2 || neighbors == 3)) {
-            return true;
-        } else if (grid[y][x] == 0 && neighbors == 3) {
-            return true;
-        } else {
-            return true;
-        }*/
     }
-
-    /*public void update(boolean status, int x, int y) {
-        System.out.println(status);
-        if (status) {
-            futuregrid[y][x] = 1;
-        } else {
-            futuregrid[y][x] = 0;
-        }
-    }*/
 }
