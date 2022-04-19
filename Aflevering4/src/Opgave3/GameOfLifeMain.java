@@ -7,8 +7,8 @@ import java.util.Scanner;
 
 public class GameOfLifeMain {
     public static void main(String[] args) throws FileNotFoundException {
-        int xlim = 4;
-        int ylim = 4;
+        int xlim = 100;
+        int ylim = 100;
         GameOfLife game = new GameOfLife(xlim,ylim);
         while (true) {
             game.init(xlim,ylim);

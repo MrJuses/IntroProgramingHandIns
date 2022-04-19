@@ -80,7 +80,7 @@ public class GameOfLife {
                 }
             }
         }
-        StdDraw.show(10000);
+        StdDraw.show(50);
     }
 
     public void state(int xlim, int ylim) {
@@ -99,7 +99,6 @@ public class GameOfLife {
 
                 } else if (x == xlim - 1 && y == ylim - 1) {
                     pass(neighborcheck(xlim - 2, xlim - 1, ylim - 2, ylim - 1), x, y);
-
                 }
                 //Edges
                 else if (x == 0) {
