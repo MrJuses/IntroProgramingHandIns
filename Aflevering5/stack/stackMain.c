@@ -2,6 +2,7 @@
 
 #include <stdio.h>
 #include "stack.h"
+#include <stdlib.h>
 
 /*
 
@@ -18,10 +19,12 @@ int main() {
   push(myStack, 123);
   push(myStack, 99);
   push(myStack, 4444);
-  while (!empty(myStack)) {
+  while (empty(myStack)==1) {
     int value;
     value = pop(myStack);
     printf("popped: %d\n", value);
   }
+  top(myStack);
+  pop(myStack);
   return 0;
 }
