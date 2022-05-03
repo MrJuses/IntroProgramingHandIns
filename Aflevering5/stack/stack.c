@@ -18,7 +18,7 @@ stack_t * newStack(){
     return nstack;
 }
 int pop(stack_t * nstack){
-    if(empty(nstack) == 0) {
+    if(empty(nstack) == 1) {
         printf("\nError! Cant find element, Stack is empty\n");
         exit(1);
     } else{
@@ -43,8 +43,8 @@ int top(stack_t * nstack){
 }
 int empty(stack_t * nstack){
     if(nstack->size == 0){
-        return 0;
-    } else {
         return 1;
+    } else {
+        return 0;
     }
 }

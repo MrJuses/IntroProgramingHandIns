@@ -19,7 +19,7 @@ int main() {
   push(myStack, 123);
   push(myStack, 99);
   push(myStack, 4444);
-  while (empty(myStack)==1) {
+  while (!empty(myStack)) {
     int value;
     value = pop(myStack);
     printf("popped: %d\n", value);
